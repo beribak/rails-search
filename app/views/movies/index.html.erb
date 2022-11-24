@@ -1,0 +1,32 @@
+<div class="p-3">
+    <%= form_with url: movies_path, method: :get, class: "d-flex" do %>
+        <%= text_field_tag :query,
+        params[:query],
+        class: "form-control",
+        placeholder: "Find a movie"
+        %>
+        <%= submit_tag "Search", class: "btn btn-primary" %>
+    <% end %>
+</div>
+
+<div class="container">
+    
+    <% if @query %>
+        <% @movies.each do |movie| %>
+            <div class="mb-3 border border-primary p-2">
+                <p><%= movie.content %></p>
+                <%= movie.searchable_type%>
+            </div>
+        <% end %>
+    <% else %> 
+        <% @movies.each do |movie| %>
+            <div class="mb-3 border border-primary p-2">
+                <p><%= movie.title %></p>
+                <p><%= movie.synopsis %></p>
+                <p><%= movie.year %></p>
+
+                <p><%= movie.class %><%#= movie.director.first_name %> <%#= movie.director.last_name %></p>
+            </div>
+        <% end %>
+    <% end %>
+</div>
